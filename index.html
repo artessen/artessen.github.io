@@ -3,200 +3,293 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scientific Research Administrator | Portfolio</title>
+    <title>Dr. Arthur H. Essenfelder | AI & DRR Expert</title>
+    
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <style>
         :root {
-            --primary-color: #0e1d34; /* Deep Navy (Professional/EU) */
-            --accent-color: #0d6efd;  /* Bright Blue */
-            --bg-light: #f6f9ff;
-            --text-muted: #6c757d;
+            /* Modern Tech Palette */
+            --bg-dark: #0f172a;       /* Deep Navy */
+            --bg-darker: #020617;     /* Almost Black */
+            --accent-cyan: #06b6d4;   /* Data Science Cyan */
+            --accent-blue: #3b82f6;   /* EU Blue */
+            --text-light: #f8fafc;
+            --text-gray: #94a3b8;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
-            color: #444444;
-            line-height: 1.6;
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
         }
 
         h1, h2, h3, h4, h5 {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--primary-color);
+            font-family: 'Space Grotesk', sans-serif; /* Tech-oriented font */
+            letter-spacing: -0.5px;
         }
 
-        /* Navigation */
+        /* --- Navigation --- */
         .navbar {
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
         }
         .nav-link {
-            color: var(--primary-color);
-            font-weight: 600;
+            color: var(--text-light) !important;
+            font-weight: 500;
+            transition: color 0.3s;
         }
         .nav-link:hover {
-            color: var(--accent-color);
+            color: var(--accent-cyan) !important;
         }
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(14, 29, 52, 0.9), rgba(14, 29, 52, 0.9)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 120px 0 80px 0;
-            text-align: center;
+        /* --- Hero Section & Globe --- */
+        .hero-section {
+            position: relative;
+            min-height: 100vh; /* Full screen */
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: radial-gradient(circle at top left, #1e293b, var(--bg-darker));
         }
-        .hero h1 { color: white; font-weight: 700; font-size: 3rem; }
-        .hero p { font-size: 1.25rem; color: #dce7f9; }
+        
+        #globe-viz {
+            position: absolute;
+            top: 0;
+            right: -20%; /* Offset globe to the right */
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.8;
+        }
 
-        /* Timeline Section */
+        .hero-content {
+            position: relative;
+            z-index: 1; /* Text above globe */
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            background: linear-gradient(to right, #fff, var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-gray);
+            border-left: 3px solid var(--accent-cyan);
+            padding-left: 15px;
+        }
+
+        /* --- Glassmorphism Cards --- */
+        .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(6, 182, 212, 0.15); /* Cyan glow */
+            border-color: var(--accent-cyan);
+        }
+
+        /* --- Timeline Styling --- */
         .timeline-item {
-            padding-left: 40px;
+            border-left: 2px solid var(--accent-blue);
+            padding-left: 30px;
             position: relative;
             margin-bottom: 50px;
-            border-left: 2px solid #eef0f2;
         }
         .timeline-item::before {
             content: "";
             position: absolute;
-            width: 16px;
-            height: 16px;
+            left: -6px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            left: -9px;
-            top: 0;
-            background: #fff;
-            border: 2px solid var(--accent-color);
+            background: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--accent-cyan);
         }
         .timeline-date {
+            color: var(--accent-cyan);
             font-size: 0.9rem;
-            color: var(--accent-color);
-            font-weight: 600;
-            margin-bottom: 10px;
-            display: block;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        /* Skills Badges */
+        /* --- Skills Badges --- */
         .skill-badge {
+            background: rgba(6, 182, 212, 0.1);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(6, 182, 212, 0.2);
+            padding: 8px 16px;
+            border-radius: 30px;
             font-size: 0.9rem;
-            padding: 8px 15px;
-            border-radius: 50px;
             margin: 5px;
-            background-color: white;
-            border: 1px solid #dee2e6;
-            color: var(--primary-color);
             display: inline-block;
             transition: all 0.3s;
         }
         .skill-badge:hover {
-            background-color: var(--accent-color);
-            color: white;
-            border-color: var(--accent-color);
+            background: var(--accent-cyan);
+            color: var(--bg-darker);
         }
 
-        /* Publications */
-        .pub-card {
-            background: white;
+        /* --- Buttons --- */
+        .btn-glow {
+            background: linear-gradient(45deg, var(--accent-blue), var(--accent-cyan));
             border: none;
-            box-shadow: 0px 5px 20px rgba(0,0,0,0.05);
-            transition: transform 0.2s;
-            margin-bottom: 20px;
-            height: 100%;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.3);
+            transition: all 0.3s;
         }
-        .pub-card:hover { transform: translateY(-5px); }
-        
-        /* Print Styles */
-        @media print {
-            .navbar, .btn, footer { display: none; }
-            body { background: white; color: black; }
-            .hero { background: white; color: black; padding: 20px 0; }
-            .hero h1 { color: black; }
-            a { text-decoration: none; color: black; }
+        .btn-glow:hover {
+            box-shadow: 0 0 25px rgba(6, 182, 212, 0.6);
+            transform: scale(1.05);
+            color: white;
+        }
+        .btn-outline-glow {
+            border: 2px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            border-radius: 50px;
+            padding: 10px 28px;
+            font-weight: 600;
+            background: transparent;
+            transition: all 0.3s;
+        }
+        .btn-outline-glow:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-darker);
+        }
+
+        /* --- Section Titles --- */
+        .section-title {
+            color: white;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50%;
+            height: 3px;
+            background: var(--accent-cyan);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 991px) {
+            #globe-viz { opacity: 0.4; right: 0; }
+            .hero-title { font-size: 2.5rem; }
         }
     </style>
 </head>
-<body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="100">
+<body>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="navbar">
+    <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <a class="navbar-brand text-white fw-bold" href="#">AE.</a>
+            <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">Bio</a></li>
                     <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#publications">Publications</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Expertise</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#publications">Research</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero d-flex align-items-center">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <h1>Ph.D. Data Scientist, Machine Learning &<br>Disater Risk Reduction Expert</h1>
-                    <p class="mt-3">Scientific Project Officer at the European Commission, Joint Research Centre (EC-JRC)</p>
-                    <p class="mb-4">Bridging Artificial Intelligence, Complex Systems, and Disaster Risk Management to address Climate Risks.</p>
-                    <a href="#contact" class="btn btn-primary btn-lg rounded-pill px-5">Get in Touch</a>
-                    <a href="#publications" class="btn btn-outline-light btn-lg rounded-pill px-5 ms-3">View Research</a>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Hero Section with 3D Globe -->
+    <section class="hero-section">
+        <!-- 3D Globe Container -->
+        <div id="globe-viz"></div>
 
-    <!-- About Section -->
-    <section id="about" class="py-5">
-        <div class="container">
+        <div class="container hero-content">
             <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <h2 class="text-center mb-4">Executive Summary</h2>
-                    <p class="lead text-center mb-5">
-                        I am a data scientist and disaster risk reduction expert with over a decade of experience in developing and applying machine learning and complex systems to address pressing challenges in environmental science and policy.
+                <div class="col-lg-7" data-aos="fade-right" data-aos-duration="1200">
+                    <h1 class="hero-title mb-3">Dr. Arthur H. Essenfelder</h1>
+                    <h2 class="text-white mb-4">Scientific Project Officer at EC-JRC</h2>
+                    <p class="hero-subtitle mb-4">
+                        Bridging Artificial Intelligence, Complex Systems, and Disaster Risk Reduction to address global climate challenges.
                     </p>
-                    
-                    <div class="row g-4">
-                        <div class="col-md-6">
-                            <h4><i class="fas fa-landmark me-2 text-primary"></i>Policy Alignment</h4>
-                            <p>My work directly supports the <strong>EU AI Act</strong>, the <strong>European Green Deal</strong>, and the <strong>Sendai Framework</strong>. I specialize in translating complex data into strategic foresight for EU institutions.</p>
-                        </div>
-                        <div class="col-md-6">
-                            <h4><i class="fas fa-brain me-2 text-primary"></i>Technical Expertise</h4>
-                            <p>Proficient in <strong>Python, R & Bash</strong>, I build deep neural networks for climate-related hazard detection and risk assessment, contributing to the Copernicus Emergency Management Service (CEMS).</p>
-                        </div>
+                    <div class="d-flex gap-3">
+                        <a href="#contact" class="btn btn-glow">Get in Touch</a>
+                        <a href="#publications" class="btn btn-outline-glow">View Research</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About / Short Bio Section -->
+    <!-- Bio / Executive Summary -->
     <section id="about" class="py-5">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <h2 class="text-center mb-4">Short Bio</h2>
-                    <div class="bio-text">
+            <div class="text-center" data-aos="fade-up">
+                <h2 class="section-title">Executive Summary</h2>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="glass-card" data-aos="fade-up">
+                        <p class="lead text-center mb-4 text-white">
+                            I am a Data Scientist and Disaster Risk Reduction expert with over a decade of experience developing ML solutions for environmental policy.
+                        </p>
+                        
+                        <div class="row g-4 mt-2">
+                            <div class="col-md-6 border-end border-secondary">
+                                <div class="p-3">
+                                    <h4 class="text-info"><i class="fas fa-landmark me-2"></i>Policy Alignment</h4>
+                                    <p class="text-gray">Direct support for the <strong>EU AI Act</strong>, <strong>European Green Deal</strong>, and <strong>Sendai Framework</strong>. I translate complex data into strategic foresight for EU institutions.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3">
+                                    <h4 class="text-info"><i class="fas fa-network-wired me-2"></i>Technical Mastery</h4>
+                                    <p class="text-gray">Proficient in <strong>Python & R</strong>. I build deep neural networks for drought hazard detection and risk assessment within the Copernicus Emergency Management Service (CEMS).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Short Bio Text -->
+                    <div class="mt-5 text-gray" data-aos="fade-up">
+                        <h3 class="text-white mb-3">Professional Bio</h3>
                         <p>
                             Dr. Arthur H. Essenfelder is a disaster risk reduction and machine-learning expert working as a scientific project officer at the European Commission - Joint Research Centre (EC-JRC) within the Copernicus Emergency Management Service (CEMS). He is responsible for developing indicators related to drought hazard and risk detection and monitoring, focusing on incorporating machine-learning methods.
                         </p>
                         <p>
-                            Previously, he has acted as the Lead Researcher on Performance Assessment of Disaster Risk Reduction Strategies at the Euro-Mediterranean Centre on Climate Change (CMCC) and as a lecturer at Ca’Foscari University of Venice, Italy, covering topics such as machine-learning models for risk assessments and decision-theory. He has worked with machine-learning development for over 10 years, since his Bachelor's degree in environmental engineering and continuing with his Ph.D. in Science and Management of Climate Change at Ca'Foscari University, Venice.
-                        </p>
-                        <p>
-                            His main research interests focus on the development and application of AI/ML methods for disaster risk reduction, compound and cascading risk assessments, and crisis management under a perspective of seasonal to decadal time horizons. Dr. Essenfelder has also contributed as an expert to the European Environmental Agency’s European Topic Centre on Climate change impacts, vulnerability and adaptation (ETC-CCA) and as a task leader on disaster impact modelling of the project SaferPLACES (EIT Climate-KIC). He has participated in various scientific conferences and has over 20 scientific publications in international peer-reviewed journals.
+                            Previously, he acted as Lead Researcher on Performance Assessment of Disaster Risk Reduction Strategies at the Euro-Mediterranean Centre on Climate Change (CMCC) and as a lecturer at Ca’Foscari University of Venice. His research focuses on the development and application of AI/ML methods for disaster risk reduction, compound and cascading risk assessments, and crisis management under seasonal to decadal time horizons.
                         </p>
                     </div>
                 </div>
@@ -205,257 +298,60 @@
     </section>
 
     <!-- Experience Section -->
-    <!-- <section id="experience" class="py-5 bg-light">
+    <section id="experience" class="py-5">
         <div class="container">
-            <h2 class="mb-5 text-center">Professional Experience</h2>
-            <div class="row">
-                <div class="col-lg-8 mx-auto"> -->
+            <h2 class="section-title text-center" data-aos="fade-up">Professional Experience</h2>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-9">
                     
                     <!-- Entry 1 -->
-                    <!-- <div class="timeline-item">
-                        <span class="timeline-date">Jun 2022 - Present</span>
-                        <h4>Scientific Project Officer</h4>
-                        <h5 class="text-muted">European Commission - Joint Research Centre (JRC) | Ispra, Italy</h5>
-                        <p><em>Unit E.1 – Disaster Risk Management & Unit A.5 – Scientific Development</em></p>
-                        <ul>
-                            <li><strong>Principal Investigator</strong> of the "AI-enhanced Agro-Climate Service" (AIACS).</li>
-                            <li>Developing AI-enhanced climate services for disaster risk management to predict unfavourable climate conditions.</li>
-                            <li>Created image-processing ML models to identify "Areas-of-Concern" in JRC MARS Bulletins.</li>
-                            <li>Analysing big agro-climatic datasets to support disaster risk research.</li>
-                            <li>Developing ML models for conflict forecasting in African countries (1-6 month horizon).</li>
-                        </ul>
-                    </div> -->
+                    <div class="timeline-item" data-aos="fade-left">
+                        <div class="glass-card p-4">
+                            <span class="timeline-date">Jun 2022 - Present</span>
+                            <h4 class="text-white mt-2">Scientific Project Officer</h4>
+                            <h5 class="text-info">European Commission - Joint Research Centre (JRC)</h5>
+                            <p class="small text-gray fst-italic">Ispra, Italy | Copernicus Emergency Management Service</p>
+                            <p class="text-gray mt-3">
+                                Leading the "AI-enhanced Agro-Climate Service" (AIACS). Developing Farm Digital Twins and ML models to predict climate extremes, directly supporting the European Drought Observatory.
+                            </p>
+                        </div>
+                    </div>
 
                     <!-- Entry 2 -->
-                    <!-- <div class="timeline-item">
-                        <span class="timeline-date">Apr 2017 - May 2022</span>
-                        <h4>Lead Researcher on DRR Strategies</h4>
-                        <h5 class="text-muted">Euro-Mediterranean Centre on Climate Change (CMCC) | Venice, Italy</h5>
-                        <ul>
-                            <li><strong>Task Leader</strong> for Horizon 2020 projects (RECEIPT & CLARA), integrating AI methods into flood modelling.</li>
-                            <li>Developed <strong>SaferPLACES</strong>, a machine-learning DEM-based rapid flood inundation model.</li>
-                            <li>Contributed to the <strong>INFORM Global Risk Index</strong>, developing dynamic climate change risk indices.</li>
-                            <li>Lecturer at Ca' Foscari University: Machine learning, climate risk assessment, and decision theory.</li>
-                        </ul>
-                    </div> -->
+                    <div class="timeline-item" data-aos="fade-left" data-aos-delay="100">
+                        <div class="glass-card p-4">
+                            <span class="timeline-date">May 2020 - May 2022</span>
+                            <h4 class="text-white mt-2">Disaster Risk Reduction Consultant</h4>
+                            <h5 class="text-info">The World Bank</h5>
+                            <p class="text-gray mt-3">
+                                Developed compound risk estimates for floods/droughts during the COVID-19 pandemic. Created innovative methodologies for high-resolution capital stock spatialisation in the Philippines, Jamaica, and Morocco.
+                            </p>
+                        </div>
+                    </div>
 
                     <!-- Entry 3 -->
-                    <!-- <div class="timeline-item">
-                        <span class="timeline-date">Feb 2019 - May 2019</span>
-                        <h4>Data Scientist Consultant</h4>
-                        <h5 class="text-muted">ClimateAI, Inc. | California, USA</h5>
-                        <ul>
-                            <li>Developed Python-based ML prototypes for short-to-mid-term temperature forecasts in California.</li>
-                            <li>Built R-based deep learning neural networks for crop chilling requirement forecasts (pistachio/hazelnut).</li>
-                        </ul>
-                    </div> -->
-
-                    <!-- Entry 4 -->
-                    <!-- <div class="timeline-item">
-                        <span class="timeline-date">Dec 2016 - Mar 2017</span>
-                        <h4>Ph.D. Researcher</h4>
-                        <h5 class="text-muted">Fondazione Eni Enrico Mattei (FEEM) | Venice, Italy</h5>
-                        <p>Consolidated hydrologic and socio-economic data for eco-hydrologic (SWAT) and microeconomic models within the SWITCH-ON and GREEN projects.</p>
+                    <div class="timeline-item" data-aos="fade-left" data-aos-delay="200">
+                        <div class="glass-card p-4">
+                            <span class="timeline-date">Apr 2017 - May 2022</span>
+                            <h4 class="text-white mt-2">Lead Researcher (DRR Strategies)</h4>
+                            <h5 class="text-info">Euro-Mediterranean Centre on Climate Change (CMCC)</h5>
+                            <p class="text-gray mt-3">
+                                Task Leader for H2020 projects (RECEIPT, CLARA). Developed the <strong>SaferPLACES</strong> ML flood model. Contributed to the <strong>INFORM Global Risk Index</strong>.
+                            </p>
+                        </div>
                     </div>
-
-                </div>
-            </div>
-        </div>
-    </section> -->
-
-    <!-- Experience Section -->
-    <section id="experience" class="py-5 bg-light">
-        <div class="container">
-            <h2 class="mb-5 text-center">Professional Experience</h2>
-            <div class="row">
-                <div class="col-lg-9 mx-auto timeline-section">
                     
-                    <!-- Entry 1: EC JRC -->
-                    <div class="timeline-item">
-                        <span class="timeline-date">Jun 2022 - Present</span>
-                        <h4>Scientific Project Officer</h4>
-                        <h5 class="text-primary">European Commission - Joint Research Centre (JRC)</h5>
-                        <span class="timeline-location">Ispra, Lombardy, Italy</span>
-                        <p><strong>Project:</strong> Contract Agent within the Exploratory Research Project “AI-enhanced Agro-Climate Service” (AIACS).</p>
-                        <ul>
-                            <li>Developing an innovative AI-enhanced climate service prototype to digest, analyse, and interpret data for monitoring and predicting unfavourable climate conditions and extremes.</li>
-                            <li>Developing a first "farm digital twin" with methodologies to upscale derived information for disaster risk-reduction strategies.</li>
-                            <li>Testing prototypes in agro-climatic contexts and evaluating them against current JRC monitoring systems.</li>
-                            <li>Contributing to the JRC Exploratory Research Programme (ER) to enrich scientific work with novel results.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Entry 2: World Bank -->
-                    <div class="timeline-item">
-                        <span class="timeline-date">May 2020 - May 2022</span>
-                        <h4>Disaster Risk Reduction Consultant (External)</h4>
-                        <h5 class="text-primary">The World Bank</h5>
-                        <span class="timeline-location">Remote / Freelance</span>
-                        <ul>
-                            <li>Developed disaster risk estimates for floods and droughts for the study <em>“COVID-19 Pandemic, Financial Shock and Natural Disasters: Assessing compound risks in four countries.”</em></li>
-                            <li>Created an innovative methodology for high-resolution spatialisation of exposed capital stock information.</li>
-                            <li>Provided expert recommendations on acquiring flooding datasets for high-resolution impact computation in the Philippines, Jamaica, and Morocco.</li>
-                            <li>Implemented a dynamic model for estimating incremental drought impacts due to sustained, multi-year drought events.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Entry 3: Ca Foscari Lecturer -->
-                    <div class="timeline-item">
-                        <span class="timeline-date">Dec 2018 - May 2022</span>
-                        <h4>Lecturer</h4>
-                        <h5 class="text-primary">Ca' Foscari University of Venice</h5>
-                        <span class="timeline-location">Venice Area, Italy</span>
-                        <p>Teaching activity for the following courses:</p>
-                        <ul>
-                            <li><strong>Ph.D. in Science and Management of Climate Change:</strong> Course: Climate Damage Modelling and Assessment [PHD145].</li>
-                            <li><strong>Ph.D. in Science and Management of Climate Change:</strong> Course: Decision Theory and Multi-Criteria Analysis [PHD067].</li>
-                            <li><strong>M.Sc. in Environmental Sciences:</strong> Course: Review of Calculus [CM0547].</li>
-                        </ul>
-                    </div>
-
-                    <!-- Entry 4: CMCC -->
-                    <div class="timeline-item">
-                        <span class="timeline-date">Apr 2017 - May 2022</span>
-                        <h4>Lead Researcher on Performance Assessment of DRR Strategies</h4>
-                        <h5 class="text-primary">Euro-Mediterranean Centre on Climate Change (CMCC)</h5>
-                        <span class="timeline-location">Venice Area, Italy</span>
-                        <ul>
-                            <li>Expert on 2D hydrodynamic multi-hazard flood modelling (ANUGA) for urban/regional areas (EU Horizon 2020 <strong>CLARA project</strong>).</li>
-                            <li>Developed a DEM-based, rapid flood inundation model (<strong>SaferPLACES project</strong>, EIT Climate-KIC).</li>
-                            <li>Developed an innovative flood risk climate service (FloodMage) based on Copernicus C3S data.</li>
-                            <li>Task leader on climate model data tidying for driving flood hazard and damage modelling.</li>
-                            <li>Expert for the European Environmental Agency’s European Topic Centre on Climate Change (ETC-CCA).</li>
-                            <li>Conducted pluvial/flash flood risk assessment for 20 European urban centres (C3S-DRR).</li>
-                            <li>Member of the <strong>INFORM Global Risk Index</strong> consortium, supporting dynamic climate change risk indices.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Entry 5: ClimateAI -->
-                    <div class="timeline-item">
-                        <span class="timeline-date">Feb 2019 - Feb 2020</span>
-                        <h4>Data Scientist Consultant</h4>
-                        <h5 class="text-primary">ClimateAI</h5>
-                        <span class="timeline-location">Remote / Freelance</span>
-                        <ul>
-                            <li>Developed ML prototypes for short- to mid-term sub-daily temperature forecasts in California.</li>
-                            <li>Built R-based deep learning neural network models for seasonal forecasting of chilling requirements for pistachio and hazelnut crops.</li>
-                            <li>Created Python-based ML algorithms for converting long-term temperature projections into chill accumulation requirements.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Entry 6: Ca Foscari Expert -->
-                    <div class="timeline-item">
-                        <span class="timeline-date">Jun 2017 - Aug 2018</span>
-                        <h4>Expert on Quantitative Methods for Climate Change</h4>
-                        <h5 class="text-primary">Ca' Foscari University of Venice</h5>
-                        <span class="timeline-location">Venice Area, Italy</span>
-                        <ul>
-                            <li>Assisted Ph.D. students on “Quantitative Methods for Climate Change” and “Decision Theory”.</li>
-                            <li>Ministered a seminar series: <em>“A Short Introduction to R: Building the Foundations to Real Life Applications.”</em></li>
-                            <li>Managed grading and hands-on exercises.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Entry 7: FEEM -->
-                    <div class="timeline-item">
-                        <span class="timeline-date">Dec 2016 - Mar 2017</span>
-                        <h4>Ph.D. Student Researcher</h4>
-                        <h5 class="text-primary">Fondazione Eni Enrico Mattei (FEEM)</h5>
-                        <span class="timeline-location">Venice Area, Italy</span>
-                        <ul>
-                            <li>Collected and consolidated hydrologic/socio-economic data for eco-hydrologic (SWAT) and microeconomic models (SWITCH-ON Project).</li>
-                            <li>Managed data for evaluating adaptation measures and nature-based solutions in river basins (GREEN Project).</li>
-                        </ul>
-                    </div>
-
-                    <!-- Entry 8: TU Dresden -->
-                    <div class="timeline-item">
-                        <span class="timeline-date">Mar 2015 - Nov 2015</span>
-                        <h4>Visiting Researcher</h4>
-                        <h5 class="text-primary">Technische Universität Dresden</h5>
-                        <span class="timeline-location">Dresden Area, Germany</span>
-                        <ul>
-                            <li>SWAT model set-up and calibration.</li>
-                            <li>Assessed flood protection through retention and detention basins with managed soils.</li>
-                            <li>Modelled water and nutrient balances in river basins.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Entry 9: Suring IDP -->
-                    <div class="timeline-item">
-                        <span class="timeline-date">Jan 2013 - Jun 2013</span>
-                        <h4>Environmental Engineer Trainee</h4>
-                        <h5 class="text-primary">Suring IDP, Inversiones, Desarrollos y Proyectos, S.L.</h5>
-                        <span class="timeline-location">Sevilla Area, Spain</span>
-                        <ul>
-                            <li>Developed energy saving/efficiency reports and renewable energy studies.</li>
-                            <li>Conducted energy audits for buildings and street-lights.</li>
-                            <li>Developed Visual Basic software to support decision-making for public lighting improvements.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Entry 10: Votorantim -->
-                    <div class="timeline-item">
-                        <span class="timeline-date">Apr 2011 - May 2012</span>
-                        <h4>Junior Environmental Analyst</h4>
-                        <h5 class="text-primary">Votorantim Cimentos</h5>
-                        <span class="timeline-location">Curitiba Area, Brazil</span>
-                        <ul>
-                            <li>Managed sales of environmental liabilities (scraps) and obsolete materials.</li>
-                            <li>Trained and coordinated a team of 16 on inventory and environmental liability management.</li>
-                            <li>Developed corporate guides for inventory and storage.</li>
-                            <li>Created automated Excel spreadsheets and Access routines linked with SAP R/3.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Entry 11: Cosan -->
-                    <div class="timeline-item">
-                        <span class="timeline-date">Feb 2009 - Mar 2011</span>
-                        <h4>Junior Process Analyst</h4>
-                        <h5 class="text-primary">Cosan</h5>
-                        <span class="timeline-location">Curitiba Area, Brazil</span>
-                        <ul>
-                            <li>Reviewed and updated the Solid Waste Management Plan (SWMP) and Corporate EMS.</li>
-                            <li>Provided operational support to branches in the Brazil-South region.</li>
-                            <li>Developed VB.NET software to control tank wagon transit and support daily transfer decisions.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Entry 12: Lactec -->
-                    <div class="timeline-item">
-                        <span class="timeline-date">Nov 2008 - Feb 2009</span>
-                        <h4>Undergraduate Researcher</h4>
-                        <h5 class="text-primary">Lactec (CEHPAR Lab)</h5>
-                        <span class="timeline-location">Curitiba Area, Brazil</span>
-                        <ul>
-                            <li>Monitored water quality of reservoirs belonging to COPEL.</li>
-                            <li>Developed automated VBA spreadsheets to optimise water quality indicator calculations.</li>
-                            <li>Created geo-referenced thematic maps using ArcGIS.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Entry 13: UFPR -->
-                    <div class="timeline-item">
-                        <span class="timeline-date">Mar 2008 - Aug 2008</span>
-                        <h4>Undergraduate Researcher</h4>
-                        <h5 class="text-primary">Universidade Federal do Paraná</h5>
-                        <span class="timeline-location">Curitiba Area, Brazil</span>
-                        <ul>
-                            <li>Investigated causes of excessive CO gas emission from food production lines.</li>
-                            <li>Developed a pilot catalytic converter to control emissions.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Entry 14: CAVO -->
-                    <div class="timeline-item">
-                        <span class="timeline-date">Oct 2007 - Mar 2008</span>
-                        <h4>Environmental Analyst Intern</h4>
-                        <h5 class="text-primary">CAVO Serviços e Saneamento S.A.</h5>
-                        <span class="timeline-location">Curitiba Area, Brazil</span>
-                        <ul>
-                            <li>Monitored waste generation by public and private clients.</li>
-                            <li>Developed automated VBA spreadsheets to optimise waste generation calculations.</li>
-                        </ul>
+                    <!-- Entry 4 -->
+                    <div class="timeline-item" data-aos="fade-left" data-aos-delay="300">
+                        <div class="glass-card p-4">
+                            <span class="timeline-date">Feb 2019 - Feb 2020</span>
+                            <h4 class="text-white mt-2">Data Scientist Consultant</h4>
+                            <h5 class="text-info">ClimateAI (Silicon Valley)</h5>
+                            <p class="text-gray mt-3">
+                                Developed Deep Learning models for sub-daily temperature forecasts and crop chilling requirements in California.
+                            </p>
+                        </div>
                     </div>
 
                 </div>
@@ -466,54 +362,50 @@
     <!-- Skills Section -->
     <section id="skills" class="py-5">
         <div class="container">
-            <h2 class="text-center mb-5">Technical & Scientific Skills</h2>
+            <h2 class="section-title text-center" data-aos="fade-up">Technical Expertise</h2>
             
-            <div class="row text-center">
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 border-0 shadow-sm p-4">
-                        <div class="card-body">
-                            <i class="fas fa-code fa-3x text-primary mb-3"></i>
-                            <h4>Data Science & AI</h4>
-                            <div class="mt-3">
-                                <span class="skill-badge">Python (Advanced)</span>
-                                <span class="skill-badge">R Programming</span>
-                                <span class="skill-badge">Deep Learning</span>
-                                <span class="skill-badge">Neural Networks</span>
-                                <span class="skill-badge">Big Data Analysis</span>
-                                <span class="skill-badge">Spatial Analysis</span>
-                            </div>
+            <div class="row g-4">
+                <!-- Card 1 -->
+                <div class="col-md-4" data-aos="zoom-in">
+                    <div class="glass-card h-100 text-center">
+                        <i class="fas fa-brain fa-3x text-info mb-3"></i>
+                        <h4 class="text-white">AI & Machine Learning</h4>
+                        <div class="mt-4">
+                            <span class="skill-badge">Deep Learning</span>
+                            <span class="skill-badge">Neural Networks</span>
+                            <span class="skill-badge">Python (Advanced)</span>
+                            <span class="skill-badge">R Programming</span>
+                            <span class="skill-badge">Big Data</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 border-0 shadow-sm p-4">
-                        <div class="card-body">
-                            <i class="fas fa-globe-europe fa-3x text-primary mb-3"></i>
-                            <h4>Environment & Policy</h4>
-                            <div class="mt-3">
-                                <span class="skill-badge">Disaster Risk Reduction</span>
-                                <span class="skill-badge">Climate Adaptation</span>
-                                <span class="skill-badge">Drought Monitoring</span>
-                                <span class="skill-badge">Flood Modelling</span>
-                                <span class="skill-badge">Horizon 2020</span>
-                                <span class="skill-badge">Copernicus (CEMS)</span>
-                            </div>
+                <!-- Card 2 -->
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="glass-card h-100 text-center">
+                        <i class="fas fa-globe-americas fa-3x text-info mb-3"></i>
+                        <h4 class="text-white">Geospatial & DRR</h4>
+                        <div class="mt-4">
+                            <span class="skill-badge">Drought Monitoring</span>
+                            <span class="skill-badge">Flood Modelling</span>
+                            <span class="skill-badge">Copernicus (CEMS)</span>
+                            <span class="skill-badge">Spatial Analysis (GIS)</span>
+                            <span class="skill-badge">INFORM Risk Index</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 border-0 shadow-sm p-4">
-                        <div class="card-body">
-                            <i class="fas fa-comments fa-3x text-primary mb-3"></i>
-                            <h4>Languages</h4>
-                            <div class="mt-3">
-                                <span class="skill-badge">English (C2)</span>
-                                <span class="skill-badge">Italian (C2)</span>
-                                <span class="skill-badge">Portuguese (C2)</span>
-                                <span class="skill-badge">Spanish (B2)</span>
-                            </div>
+                <!-- Card 3 -->
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="glass-card h-100 text-center">
+                        <i class="fas fa-comments fa-3x text-info mb-3"></i>
+                        <h4 class="text-white">Communication</h4>
+                        <div class="mt-4">
+                            <span class="skill-badge">English (C2)</span>
+                            <span class="skill-badge">Italian (C2)</span>
+                            <span class="skill-badge">Portuguese (C2)</span>
+                            <span class="skill-badge">Spanish (B2)</span>
+                            <span class="skill-badge">University Lecturing</span>
                         </div>
                     </div>
                 </div>
@@ -521,155 +413,178 @@
         </div>
     </section>
 
-    <!-- Education Section -->
-    <section class="py-5 bg-light">
+    <!-- Education (Compact) -->
+    <section class="py-5">
         <div class="container">
-            <h2 class="text-center mb-5">Education</h2>
+            <h2 class="section-title text-center" data-aos="fade-up">Education</h2>
             <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="list-group">
-                        <div class="list-group-item list-group-item-action p-4">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Ph.D. Science and Management of Climate Change</h5>
-                                <small class="text-muted">2013 - 2017</small>
-                            </div>
-                            <p class="mb-1 text-primary">Ca’ Foscari University of Venice, Italy</p>
-                            <small>Thesis: Climate Change and Watershed Planning: Understanding Related Impacts and Risks.</small>
-                        </div>
-                        <div class="list-group-item list-group-item-action p-4">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">MSc Environmental Science & Sustainable Development</h5>
-                                <small class="text-muted">2010</small>
-                            </div>
-                            <p class="mb-1 text-primary">Fundação Getúlio Vargas, Brazil</p>
-                            <small>Thesis: The role of machine-learning technologies in environmental management.</small>
-                        </div>
-                        <div class="list-group-item list-group-item-action p-4">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">BSc Environmental Engineering</h5>
-                                <small class="text-muted">2005 - 2010</small>
-                            </div>
-                            <p class="mb-1 text-primary">Federal University of Paraná, Brazil</p>
-                        </div>
+                <div class="col-lg-8">
+                    <div class="glass-card" data-aos="fade-up">
+                        <ul class="list-unstyled mb-0">
+                            <li class="mb-4 border-bottom border-secondary pb-3">
+                                <h5 class="text-white mb-1">Ph.D. Science and Management of Climate Change (2017)</h5>
+                                <p class="text-info mb-1">Ca’ Foscari University of Venice, Italy</p>
+                                <small class="text-gray">Thesis on Climate Change and Watershed Planning.</small>
+                            </li>
+                            <li class="mb-4 border-bottom border-secondary pb-3">
+                                <h5 class="text-white mb-1">MSc Environmental Science (2010)</h5>
+                                <p class="text-info mb-0">Fundação Getúlio Vargas, Brazil</p>
+                            </li>
+                            <li>
+                                <h5 class="text-white mb-1">BSc Environmental Engineering (2010)</h5>
+                                <p class="text-info mb-0">Federal University of Paraná, Brazil</p>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Publications Section (Selected High Impact) -->
+    <!-- Publications Section -->
     <section id="publications" class="py-5">
         <div class="container">
-            <h2 class="text-center mb-5">Selected Publications</h2>
-            <div class="row">
+            <h2 class="section-title text-center" data-aos="fade-up">Selected Publications</h2>
+            <div class="row g-4">
                 
                 <!-- Pub 1 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="card pub-card p-3 position-relative">
-                        <div class="card-body">
-                            <span class="badge bg-primary mb-2">2025</span>
-                            <h5 class="card-title">Explainability can foster trust in artificial intelligence in geoscience</h5>
-                            <p class="card-text small text-muted">Nature Geoscience</p>
-                            <p class="card-text small">Authors: JS Dramsch, A Toreti, <strong>A H Essenfelder</strong>, et al.</p>
-                            <div class="mt-2"><span class="badge bg-secondary">Cited over 25 times</span></div>
-                            <a href="https://www.nature.com/articles/s41561-025-01639-x" target="_blank" class="stretched-link"></a>
-                        </div>
+                <div class="col-md-6 col-lg-4" data-aos="flip-up">
+                    <div class="glass-card h-100 position-relative">
+                        <span class="badge bg-info text-dark mb-2">2025</span>
+                        <h5 class="text-white h6">Explainability can foster trust in artificial intelligence in geoscience</h5>
+                        <p class="small text-gray">Nature Geoscience</p>
+                        <p class="small text-gray">Authors: JS Dramsch, A Toreti, <strong>A H Essenfelder</strong>, et al.</p>
+                        <a href="https://www.nature.com/articles/s41561-025-01639-x" target="_blank" class="stretched-link"></a>
                     </div>
                 </div>
 
                 <!-- Pub 2 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="card pub-card p-3 position-relative">
-                        <div class="card-body">
-                            <span class="badge bg-primary mb-2">2022</span>
-                            <h5 class="card-title">Drought in Europe August 2022</h5>
-                            <p class="card-text small text-muted">Publications Office of the European Union</p>
-                            <p class="card-text small">Authors: A Toreti, D Bavera, <strong>A H Essenfelder</strong>, et al.</p>
-                            <div class="mt-2"><span class="badge bg-secondary">Cited over 150 times</span></div>
-                            <a href="https://publications.jrc.ec.europa.eu/repository/handle/JRC130493" target="_blank" class="stretched-link"></a>
-                        </div>
+                <div class="col-md-6 col-lg-4" data-aos="flip-up" data-aos-delay="100">
+                    <div class="glass-card h-100 position-relative">
+                        <span class="badge bg-info text-dark mb-2">2022</span>
+                        <h5 class="text-white h6">Drought in Europe August 2022</h5>
+                        <p class="small text-gray">Publications Office of the EU</p>
+                        <p class="small text-gray">Authors: A Toreti, <strong>A H Essenfelder</strong>, et al.</p>
+                        <div class="mt-2"><span class="badge bg-secondary">Cited 150+ times</span></div>
+                        <a href="https://publications.jrc.ec.europa.eu/repository/handle/JRC130493" target="_blank" class="stretched-link"></a>
                     </div>
                 </div>
 
                 <!-- Pub 3 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="card pub-card p-3 position-relative">
-                        <div class="card-body">
-                            <span class="badge bg-primary mb-2">2020</span>
-                            <h5 class="card-title">Irrigation technology and water conservation: A review of theory and evidence</h5>
-                            <p class="card-text small text-muted">Review of Environmental Economics and Policy</p>
-                            <p class="card-text small">Authors: C Dionisio Pérez-Blanco, <strong>A H Essenfelder</strong>, and Chris Perry</p>
-                            <div class="mt-2"><span class="badge bg-secondary">Cited over 160 times</span></div>
-                            <a href="https://doi.org/10.1093/reep/reaa004" target="_blank" class="stretched-link"></a>
-                        </div>
+                <div class="col-md-6 col-lg-4" data-aos="flip-up" data-aos-delay="200">
+                    <div class="glass-card h-100 position-relative">
+                        <span class="badge bg-info text-dark mb-2">2020</span>
+                        <h5 class="text-white h6">Irrigation technology and water conservation</h5>
+                        <p class="small text-gray">Rev. of Env. Economics and Policy</p>
+                        <p class="small text-gray">Authors: <strong>A H Essenfelder</strong>, et al.</p>
+                        <div class="mt-2"><span class="badge bg-secondary">Cited 160+ times</span></div>
+                        <a href="https://doi.org/10.1093/reep/reaa004" target="_blank" class="stretched-link"></a>
                     </div>
                 </div>
-
+                
                  <!-- Pub 4 -->
-                 <div class="col-md-6 col-lg-4">
-                    <div class="card pub-card p-3 position-relative">
-                        <div class="card-body">
-                            <span class="badge bg-primary mb-2">2025</span>
-                            <h5 class="card-title">Expert-driven explainable artificial intelligence models can detect multiple climate hazards relevant for agriculture</h5>
-                            <p class="card-text small text-muted">Communications Earth & Environment</p>
-                            <p class="card-text small">Authors: <strong>A H Essenfelder</strong>, A Toreti, and L Seguini</p>
-                            <div class="mt-2"><span class="badge bg-secondary">Cited over 10 times</span></div>
-                            <a href="https://www.nature.com/articles/s43247-024-01987-3" target="_blank" class="stretched-link"></a>
-                        </div>
+                 <div class="col-md-6 col-lg-4" data-aos="flip-up">
+                    <div class="glass-card h-100 position-relative">
+                        <span class="badge bg-info text-dark mb-2">2025</span>
+                        <h5 class="text-white h6">Expert-driven XAI models can detect multiple climate hazards</h5>
+                        <p class="small text-gray">Communications Earth & Environment</p>
+                        <p class="small text-gray">Authors: <strong>A H Essenfelder</strong>, A Toreti, L Seguini</p>
+                        <a href="https://www.nature.com/articles/s43247-024-01987-3" target="_blank" class="stretched-link"></a>
                     </div>
                 </div>
 
-                 <!-- Pub 5 -->
-                 <div class="col-md-6 col-lg-4">
-                    <div class="card pub-card p-3 position-relative">
-                        <div class="card-body">
-                            <span class="badge bg-primary mb-2">2020</span>
-                            <h5 class="card-title">A coupled hydrologic-machine learning modelling framework to support hydrologic modelling in river basins under Interbasin Water Transfer regimes</h5>
-                            <p class="card-text small text-muted">Environmental Modelling & Software</p>
-                            <p class="card-text small"><strong>A H Essenfelder</strong> and C Giupponi</p>
-                            <div class="mt-2"><span class="badge bg-secondary">Cited over 35 times</span></div>
-                            <a href="https://doi.org/10.1016/j.envsoft.2020.104779" target="_blank" class="stretched-link"></a>
-                        </div>
+                <!-- Pub 5 -->
+                <div class="col-md-6 col-lg-4" data-aos="flip-up" data-aos-delay="100">
+                    <div class="glass-card h-100 position-relative">
+                        <span class="badge bg-info text-dark mb-2">2020</span>
+                        <h5 class="text-white h6">A coupled hydrologic-machine learning modelling framework</h5>
+                        <p class="small text-gray">Env. Modelling & Software</p>
+                        <p class="small text-gray"><strong>A H Essenfelder</strong> & C Giupponi</p>
+                        <a href="https://doi.org/10.1016/j.envsoft.2020.104779" target="_blank" class="stretched-link"></a>
                     </div>
                 </div>
 
-                 <!-- Pub 6 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="card pub-card p-3 position-relative">
-                        <div class="card-body">
-                            <span class="badge bg-primary mb-2">2018</span>
-                            <h5 class="card-title">Rationalizing Systems Analysis for the Evaluation of Adaptation Strategies in Complex Human-Water Systems</h5>
-                            <p class="card-text small text-muted">Earth's Future</p>
-                            <p class="card-text small"><strong>A H Essenfelder</strong>, C Dionisio Pérez-Blanco, A Mayer</p>
-                            <div class="mt-2"><span class="badge bg-secondary">Cited over 45 times</span></div>
-                            <a href="https://doi.org/10.1029/2018EF000826" target="_blank" class="stretched-link"></a>
-                        </div>
+                <!-- Pub 6 -->
+                <div class="col-md-6 col-lg-4" data-aos="flip-up" data-aos-delay="200">
+                    <div class="glass-card h-100 position-relative">
+                        <span class="badge bg-info text-dark mb-2">2018</span>
+                        <h5 class="text-white h6">Rationalizing Systems Analysis for Adaptation Strategies</h5>
+                        <p class="small text-gray">Earth's Future</p>
+                        <p class="small text-gray"><strong>A H Essenfelder</strong>, et al.</p>
+                        <a href="https://doi.org/10.1029/2018EF000826" target="_blank" class="stretched-link"></a>
                     </div>
                 </div>
 
             </div>
-            <div class="text-center mt-4">
-                <a href="https://scholar.google.com/citations?user=_kZiRt8AAAAJ&hl=en" target="_blank" class="btn btn-outline-primary">View Full List on Google Scholar</a>
+            <div class="text-center mt-5">
+                <a href="https://scholar.google.com/citations?user=_kZiRt8AAAAJ&hl=en" target="_blank" class="btn btn-outline-glow">Full List on Google Scholar</a>
             </div>
         </div>
     </section>
 
-    <!-- Footer / Contact -->
-    <footer id="contact" class="bg-dark text-white py-5">
+    <!-- Footer -->
+    <footer id="contact" class="py-5" style="background: #020617; border-top: 1px solid var(--glass-border);">
         <div class="container text-center">
-            <h2 class="text-white mb-4">Contact</h2>
-            <p class="mb-4">Get in Touch</p>
-            <div class="d-flex justify-content-center gap-3 mb-4">
-                <a href="https://www.linkedin.com/in/arthur-hrast-essenfelder-157785178/" class="btn btn-outline-light rounded-circle"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://orcid.org/0000-0001-9396-6928" class="btn btn-outline-light rounded-circle" aria-label="ORCID" target="_blank"><i class="fab fa-orcid"></i></a>
-                <a href="https://www.researchgate.net/profile/Arthur-Hrast-Essenfelder-2?ev=hdr_xprf" class="btn btn-outline-light rounded-circle"><i class="fab fa-researchgate"></i></a>
-                <a href="mailto:arthur.essenfelder@gmail.com" class="btn btn-outline-light rounded-circle"><i class="fas fa-envelope"></i></a>
+            <h2 class="text-white mb-4">Let's Connect</h2>
+            <p class="text-gray mb-4">Open to opportunities in Scientific Research Administration & Strategic Foresight.</p>
+            <div class="d-flex justify-content-center gap-4 mb-4">
+                <a href="https://www.linkedin.com/in/arthur-hrast-essenfelder-157785178/" class="text-white fs-4 hover-cyan"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://orcid.org/0000-0001-9396-6928" class="text-white fs-4 hover-cyan"><i class="fab fa-orcid"></i></a>
+                <a href="https://www.researchgate.net/profile/Arthur-Hrast-Essenfelder-2?ev=hdr_xprf" class="text-white fs-4 hover-cyan"><i class="fab fa-researchgate"></i></a>
+                <a href="mailto:arthur.essenfelder@gmail.com" class="text-white fs-4 hover-cyan"><i class="fas fa-envelope"></i></a>
             </div>
-            <p class="small text-muted">&copy; 2025. All Rights Reserved.</p>
+            <p class="small text-gray">&copy; 2025 Dr. Arthur H. Essenfelder.</p>
         </div>
     </footer>
 
-    <!-- Bootstrap JS Bundle -->
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- 3D Globe Library (Globe.gl) -->
+    <script src="//unpkg.com/three"></script>
+    <script src="//unpkg.com/globe.gl"></script>
+    
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        // Initialize Animations
+        AOS.init({
+            once: true, // Animations happen only once
+            offset: 100
+        });
+
+        // Initialize 3D Globe
+        fetch('//unpkg.com/world-atlas/countries-110m.json').then(res => res.json()).then(countries => {
+            const world = Globe()
+            .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+            .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+            .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
+            .lineHoverPrecision(0)
+            .polygonsData(countries.objects.countries.geometries.filter(d => d.id !== 'ATA'))
+            .polygonAltitude(0.06)
+            .polygonCapColor(() => 'rgba(200, 200, 200, 0.3)')
+            .polygonSideColor(() => 'rgba(0, 100, 200, 0.15)')
+            .polygonStrokeColor(() => '#111')
+            .polygonLabel(({ properties: d }) => `
+                <div style="background: #333; padding: 5px; border-radius: 4px; color: white;">
+                    ${d.admin} (${d.iso_a3})
+                </div>
+            `)
+            .onPolygonHover(hoverD => world
+                .polygonAltitude(d => d === hoverD ? 0.12 : 0.06)
+                .polygonCapColor(d => d === hoverD ? 'rgba(6, 182, 212, 0.5)' : 'rgba(200, 200, 200, 0.3)')
+            )
+            .polygonsTransitionDuration(300)
+            (document.getElementById('globe-viz'));
+
+            // Auto-rotate
+            world.controls().autoRotate = true;
+            world.controls().autoRotateSpeed = 0.5;
+            
+            // Set initial point of view (Focus on Europe)
+            world.pointOfView({ lat: 45.0, lng: 12.0, altitude: 2.5 });
+        });
+    </script>
 </body>
 </html>
