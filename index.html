@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Arthur H. Essenfelder | AI & DRR Expert</title>
+    <title>Arthur H. Essenfelder, Ph.D. | AI & DRR Expert</title>
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -14,13 +14,16 @@
     <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
+    <!-- REQUIRED FOR 3D GLOBE -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
     <style>
         :root {
             /* Modern Tech Palette */
-            --bg-dark: #0f172a;       /* Deep Navy */
-            --bg-darker: #020617;     /* Almost Black */
-            --accent-cyan: #06b6d4;   /* Data Science Cyan */
-            --accent-blue: #3b82f6;   /* EU Blue */
+            --bg-dark: #0f172a;        /* Deep Navy */
+            --bg-darker: #020617;      /* Almost Black */
+            --accent-cyan: #06b6d4;    /* Data Science Cyan */
+            --accent-blue: #3b82f6;    /* EU Blue */
             --text-light: #f8fafc;
             --text-gray: #94a3b8;
             --glass-bg: rgba(255, 255, 255, 0.05);
@@ -32,18 +35,20 @@
             background-color: var(--bg-dark);
             color: var(--text-light);
             overflow-x: hidden;
+            margin: 0;
         }
 
         h1, h2, h3, h4, h5 {
-            font-family: 'Space Grotesk', sans-serif; /* Tech-oriented font */
+            font-family: 'Space Grotesk', sans-serif;
             letter-spacing: -0.5px;
         }
 
         /* --- Navigation --- */
         .navbar {
-            background-color: rgba(15, 23, 42, 0.8);
+            background-color: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
         }
         .nav-link {
             color: var(--text-light) !important;
@@ -57,28 +62,33 @@
         /* --- Hero Section & Globe --- */
         .hero-section {
             position: relative;
-            min-height: 100vh; /* Full screen */
+            height: 100vh;
+            width: 100%;
             display: flex;
             align-items: center;
             overflow: hidden;
-            background: radial-gradient(circle at top left, #1e293b, var(--bg-darker));
+            /* Background remains for subtle color gradient */
+            background: radial-gradient(circle at 30% 50%, #1e293b, #020617);
         }
         
+        /* 3D Canvas Container */
         #globe-viz {
             position: absolute;
             top: 0;
-            right: -20%; /* Offset globe to the right */
+            left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
-            opacity: 0.8;
+            z-index: 1; 
+            /* Optional: Add a subtle overlay on the canvas itself for better contrast */
+            box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
         }
 
         .hero-content {
             position: relative;
-            z-index: 1; /* Text above globe */
+            z-index: 10; /* Ensure text is above globe */
+            /* We will remove pointer-events: none; here, the canvas will handle the events */
         }
-
+        
         .hero-title {
             font-size: 3.5rem;
             font-weight: 700;
@@ -86,6 +96,8 @@
             background: linear-gradient(to right, #fff, var(--accent-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(6, 182, 212, 0.3);
+            margin-bottom: 1rem;
         }
 
         .hero-subtitle {
@@ -93,13 +105,17 @@
             color: var(--text-gray);
             border-left: 3px solid var(--accent-cyan);
             padding-left: 15px;
+            background: rgba(15, 23, 42, 0.8); /* Increased opacity for better contrast */
+            backdrop-filter: blur(4px);
+            border-radius: 0 10px 10px 0;
+            display: inline-block;
         }
 
         /* --- Glassmorphism Cards --- */
         .glass-card {
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--glass-border);
             border-radius: 16px;
             padding: 2rem;
@@ -108,7 +124,7 @@
         
         .glass-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px -10px rgba(6, 182, 212, 0.15); /* Cyan glow */
+            box-shadow: 0 10px 30px -10px rgba(6, 182, 212, 0.2);
             border-color: var(--accent-cyan);
         }
 
@@ -153,6 +169,7 @@
         .skill-badge:hover {
             background: var(--accent-cyan);
             color: var(--bg-darker);
+            cursor: default;
         }
 
         /* --- Buttons --- */
@@ -165,6 +182,8 @@
             font-weight: 600;
             box-shadow: 0 0 15px rgba(6, 182, 212, 0.3);
             transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
         }
         .btn-glow:hover {
             box-shadow: 0 0 25px rgba(6, 182, 212, 0.6);
@@ -179,6 +198,8 @@
             font-weight: 600;
             background: transparent;
             transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
         }
         .btn-outline-glow:hover {
             background: var(--accent-cyan);
@@ -204,8 +225,9 @@
 
         /* Mobile Adjustments */
         @media (max-width: 991px) {
-            #globe-viz { opacity: 0.4; right: 0; }
             .hero-title { font-size: 2.5rem; }
+            .hero-content { margin-top: 50px; }
+            #globe-viz { opacity: 0.8; } 
         }
     </style>
 </head>
@@ -214,7 +236,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a class="navbar-brand text-white fw-bold" href="#">AE.</a>
+            <a class="navbar-brand text-white fw-bold" href="#">Arthur Hrast Essenfelder, Ph.D.</a>
             <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -232,13 +254,13 @@
 
     <!-- Hero Section with 3D Globe -->
     <section class="hero-section">
-        <!-- 3D Globe Container -->
+        <!-- 3D Globe Container - Canvas will be injected here -->
         <div id="globe-viz"></div>
 
         <div class="container hero-content">
             <div class="row">
                 <div class="col-lg-7" data-aos="fade-right" data-aos-duration="1200">
-                    <h1 class="hero-title mb-3">Dr. Arthur H. Essenfelder</h1>
+                    <h1 class="hero-title mb-3">Arthur Hrast Essenfelder, Ph.D.</h1>
                     <h2 class="text-white mb-4">Scientific Project Officer at EC-JRC</h2>
                     <p class="hero-subtitle mb-4">
                         Bridging Artificial Intelligence, Complex Systems, and Disaster Risk Reduction to address global climate challenges.
@@ -290,6 +312,9 @@
                         </p>
                         <p>
                             Previously, he acted as Lead Researcher on Performance Assessment of Disaster Risk Reduction Strategies at the Euro-Mediterranean Centre on Climate Change (CMCC) and as a lecturer at Ca’Foscari University of Venice. His research focuses on the development and application of AI/ML methods for disaster risk reduction, compound and cascading risk assessments, and crisis management under seasonal to decadal time horizons.
+                        </p>
+                        <p>
+                            Dr. Essenfelder has also contributed as an expert to the European Environmental Agency’s European Topic Centre on Climate change impacts, vulnerability and adaptation (ETC-CCA) and as a task leader on disaster impact modelling of the project SaferPLACES (EIT Climate-KIC). His main research interests are on development and application of AI/ML methods for disaster risk reduction, on compound and cascading risk assessments, and on crisis management and disaster risk modelling under a perspective of seasonal to decadal time horizons. He has participated in various scientific conferences and has over 20 scientific publications in international peer reviewed journals.
                         </p>
                     </div>
                 </div>
@@ -482,8 +507,8 @@
                     </div>
                 </div>
                 
-                 <!-- Pub 4 -->
-                 <div class="col-md-6 col-lg-4" data-aos="flip-up">
+                <!-- Pub 4 -->
+                <div class="col-md-6 col-lg-4" data-aos="flip-up">
                     <div class="glass-card h-100 position-relative">
                         <span class="badge bg-info text-dark mb-2">2025</span>
                         <h5 class="text-white h6">Expert-driven XAI models can detect multiple climate hazards</h5>
@@ -526,65 +551,124 @@
     <footer id="contact" class="py-5" style="background: #020617; border-top: 1px solid var(--glass-border);">
         <div class="container text-center">
             <h2 class="text-white mb-4">Let's Connect</h2>
-            <p class="text-gray mb-4">Open to opportunities in Scientific Research Administration & Strategic Foresight.</p>
+            <p class="text-gray mb-4">Get in touch</p>
             <div class="d-flex justify-content-center gap-4 mb-4">
                 <a href="https://www.linkedin.com/in/arthur-hrast-essenfelder-157785178/" class="text-white fs-4 hover-cyan"><i class="fab fa-linkedin-in"></i></a>
                 <a href="https://orcid.org/0000-0001-9396-6928" class="text-white fs-4 hover-cyan"><i class="fab fa-orcid"></i></a>
                 <a href="https://www.researchgate.net/profile/Arthur-Hrast-Essenfelder-2?ev=hdr_xprf" class="text-white fs-4 hover-cyan"><i class="fab fa-researchgate"></i></a>
                 <a href="mailto:arthur.essenfelder@gmail.com" class="text-white fs-4 hover-cyan"><i class="fas fa-envelope"></i></a>
             </div>
-            <p class="small text-gray">&copy; 2025 Dr. Arthur H. Essenfelder.</p>
+            <p class="small text-gray">&copy; 2025 Arthur H. Essenfelder, Ph.D.</p>
         </div>
     </footer>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- 3D Globe Library (Globe.gl) -->
-    <script src="//unpkg.com/three"></script>
-    <script src="//unpkg.com/globe.gl"></script>
-    
     <!-- AOS Animation Library -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script>
-        // Initialize Animations
+        // Initialize Scroll Animations
         AOS.init({
-            once: true, // Animations happen only once
+            once: true,
             offset: 100
         });
 
-        // Initialize 3D Globe
-        fetch('//unpkg.com/world-atlas/countries-110m.json').then(res => res.json()).then(countries => {
-            const world = Globe()
-            .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
-            .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
-            .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
-            .lineHoverPrecision(0)
-            .polygonsData(countries.objects.countries.geometries.filter(d => d.id !== 'ATA'))
-            .polygonAltitude(0.06)
-            .polygonCapColor(() => 'rgba(200, 200, 200, 0.3)')
-            .polygonSideColor(() => 'rgba(0, 100, 200, 0.15)')
-            .polygonStrokeColor(() => '#111')
-            .polygonLabel(({ properties: d }) => `
-                <div style="background: #333; padding: 5px; border-radius: 4px; color: white;">
-                    ${d.admin} (${d.iso_a3})
-                </div>
-            `)
-            .onPolygonHover(hoverD => world
-                .polygonAltitude(d => d === hoverD ? 0.12 : 0.06)
-                .polygonCapColor(d => d === hoverD ? 'rgba(6, 182, 212, 0.5)' : 'rgba(200, 200, 200, 0.3)')
-            )
-            .polygonsTransitionDuration(300)
-            (document.getElementById('globe-viz'));
+        // --- THREE.JS GLOBE IMPLEMENTATION ---
+        let scene, camera, renderer;
+        let globe;
+        const container = document.getElementById('globe-viz');
 
-            // Auto-rotate
-            world.controls().autoRotate = true;
-            world.controls().autoRotateSpeed = 0.5;
+        const initGlobe = () => {
+            // 1. Scene setup
+            scene = new THREE.Scene();
+
+            // 2. Camera setup
+            // Adjusted field of view and z position for a subtle background effect
+            camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 1000);
+            camera.position.z = 4.5; 
+
+            // 3. Renderer setup
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            // Renderer must use the container dimensions
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            container.appendChild(renderer.domElement);
             
-            // Set initial point of view (Focus on Europe)
-            world.pointOfView({ lat: 45.0, lng: 12.0, altitude: 2.5 });
-        });
+            // 4. Create the stylized Data Globe (Sphere of Particles)
+            // Use a higher segment count for a denser, more complex look
+            const geometry = new THREE.SphereGeometry(2.5, 128, 128); 
+            const material = new THREE.PointsMaterial({
+                color: 0x06b6d4, // Use accent-cyan color
+                size: 0.012,
+                sizeAttenuation: true
+            });
+
+            // Create Points (particle system) from the sphere geometry
+            globe = new THREE.Points(geometry, material);
+            
+            // Add a subtle rotation axis line/structure (optional, for more detail)
+            const edges = new THREE.EdgesGeometry(new THREE.SphereGeometry(2.5, 32, 32));
+            const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ 
+                color: 0x3b82f6, // Use accent-blue color
+                transparent: true,
+                opacity: 0.1 
+            }));
+            globe.add(line);
+            
+            scene.add(globe);
+
+            // 5. Lighting (subtle ambient light)
+            // No strong lights needed for particle system, but keeps the scene alive
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
+            scene.add(ambientLight);
+
+            // 6. Handle window resizing
+            window.addEventListener('resize', onWindowResize, false);
+        };
+
+        const onWindowResize = () => {
+            // Check if the container still exists and has dimensions
+            if (!container || container.clientWidth === 0) return;
+            
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        };
+
+        const animate = () => {
+            requestAnimationFrame(animate);
+
+            // Continuous slow rotation for Y and X axis
+            if (globe) {
+                globe.rotation.y += 0.0005; // Very slow rotation
+                globe.rotation.x += 0.0002;
+            }
+
+            renderer.render(scene, camera);
+        };
+
+        // Start the globe visualization after the page content loads
+        window.onload = function() {
+            initGlobe();
+            animate();
+        };
+
+        // Added error handling function, though not used here
+        // const exponentialBackoffFetch = async (url, options, maxRetries = 5) => {
+        //     for (let i = 0; i < maxRetries; i++) {
+        //         try {
+        //             const response = await fetch(url, options);
+        //             if (response.ok) return response;
+        //         } catch (error) {
+        //             if (i === maxRetries - 1) throw error;
+        //             const delay = Math.pow(2, i) * 1000;
+        //             await new Promise(resolve => setTimeout(resolve, delay));
+        //         }
+        //     }
+        // };
+
     </script>
 </body>
 </html>
