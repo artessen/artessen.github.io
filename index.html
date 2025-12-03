@@ -27,11 +27,16 @@
             --glass-border: rgba(255, 255, 255, 0.1);
         }
 
+        html {
+            scroll-behavior: smooth; /* Ensures smooth scrolling when clicking the arrow */
+        }
+
         body {
             font-family: 'Outfit', sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-light);
             overflow-x: hidden;
+            margin: 0;
         }
 
         h1, h2, h3, h4, h5 {
@@ -44,6 +49,7 @@
             background-color: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
         }
         .nav-link {
             color: var(--text-light) !important;
@@ -57,7 +63,8 @@
         /* --- Hero Section & Globe --- */
         .hero-section {
             position: relative;
-            min-height: 100vh; /* Full screen */
+            height: 100vh; /* Full viewport height */
+            width: 100%;
             display: flex;
             align-items: center;
             overflow: hidden;
@@ -67,17 +74,28 @@
         #globe-viz {
             position: absolute;
             top: 0;
-            right: -20%; /* Offset globe to the right */
+            right: 0; 
             width: 100%;
             height: 100%;
-            z-index: 0;
+            z-index: 1; 
             opacity: 0.8;
+            cursor: move; 
         }
 
+        /* --- INTERACTIVITY FIX --- */
         .hero-content {
             position: relative;
-            z-index: 1;
-            pointer-events: none;
+            z-index: 10; 
+            pointer-events: none; /* Let clicks pass through to globe */
+        }
+
+        /* Re-enable clicks for content elements */
+        .hero-content h1, 
+        .hero-content h2, 
+        .hero-content p, 
+        .hero-content a, 
+        .hero-content button {
+            pointer-events: auto; 
         }
 
         .hero-title {
@@ -94,6 +112,36 @@
             color: var(--text-gray);
             border-left: 3px solid var(--accent-cyan);
             padding-left: 15px;
+        }
+
+        /* --- SCROLL DOWN ARROW --- */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20; /* Above globe */
+            pointer-events: auto; /* Make clickable */
+            text-align: center;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator a {
+            color: var(--accent-cyan);
+            font-size: 2rem;
+            text-decoration: none;
+            text-shadow: 0 0 15px rgba(6, 182, 212, 0.5);
+            transition: color 0.3s;
+        }
+
+        .scroll-indicator a:hover {
+            color: white;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
+            40% {transform: translateY(-10px) translateX(-50%);}
+            60% {transform: translateY(-5px) translateX(-50%);}
         }
 
         /* --- Glassmorphism Cards --- */
@@ -250,6 +298,13 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Scroll Down Arrow (Added Here) -->
+        <div class="scroll-indicator">
+            <a href="#about" aria-label="Scroll Down">
+                <i class="fas fa-chevron-down"></i>
+            </a>
         </div>
     </section>
 
